@@ -1,0 +1,7 @@
+{
+    "targets": [
+        "1.1.1.1",
+        "cloudflare.com",
+        "google.com"
+    ]
+}
