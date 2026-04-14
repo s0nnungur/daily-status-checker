@@ -1,52 +1,68 @@
 # Daily System Status Checker
 
-A small Python tool that checks DNS resolution and network reachability for multiple targets.  
-It logs results to daily log files and prints clean, timestamped output to the terminal.
+Daily System Status Checker is a small Python tool for checking DNS resolution and network reachability across multiple targets.
+
+It resolves hostnames, runs ping checks, prints timestamped results to the terminal, and stores logs in daily log files for later review.
 
 ## Features
-- DNS resolution (hostname → IP)
-- Ping test with latency measurement
-- Daily log files stored automatically
-- Configurable targets using `config.json`
-- Works on Windows and Linux
+
+- DNS resolution (hostname to IP)
+- Ping-based reachability checks
+- Timestamped terminal output
+- Daily log file generation
+- Configurable targets through `config.json`
+- Cross-platform use on Windows and Linux
+
+## Files
+
+- `main.py` – main script
+- `config.json` – list of targets to check
+- `README.md` – project documentation
 
 ## How It Works
-1. The script loads target hostnames from `config.json`
-2. For each target:
-   - DNS is resolved
-   - A ping test runs
-   - Results are timestamped and logged in `/logs/YYYY-MM-DD.txt`
-3. The terminal prints the results for quick checking
 
-## Example Output
- [16:54:36] DNS OK for 1.1.1.1 -> 1.1.1.1 (5.33 ms)
- [16:54:36] PING OK to 1.1.1.1 -> 19.56 ms
- [16:54:36] DNS OK for cloudflare.com -> 104.16.132.229 (9.77 ms)
- [16:54:36] PING OK to 104.16.132.229 -> 16.47 ms
-
+1. The script loads targets from `config.json`
+2. For each target, it:
+   - resolves DNS
+   - runs a ping test
+   - records the result with a timestamp
+3. Results are printed in the terminal
+4. A daily log file is created automatically
 
 ## Configuration
-Edit `config.json` to add or remove targets:
+
+Edit `config.json` to define the targets you want to monitor:
+
+```json
 {
-    "targets": [
+  "targets": [
     "1.1.1.1",
     "cloudflare.com",
     "google.com"
-    ]
+  ]
 }
-
-
+```
 ## Running the Script
+```bash
 python main.py
+```
 
-Log files appear automatically inside the `logs` directory.
+## Example Output
+```bash
+[16:54:36] DNS OK for 1.1.1.1 -> 1.1.1.1 (5.33 ms)
+[16:54:36] PING OK to 1.1.1.1 -> 19.56 ms
+[16:54:36] DNS OK for cloudflare.com -> 104.16.132.229 (9.77 ms)
+[16:54:36] PING OK to 104.16.132.229 -> 16.47 ms
+```
 
-## Why I Built This
-WAnted a simple tool to check the status of personal servers I host and use regularly. Instead of manually pinging, I built the script to automate DNS and reachability checks and log results over time. This project helped me refresh python and apply real networking concepts.
+## Why I built this
 
-## Future Ideas
-- webhook alerts on failure
-- dashboard HTML page 
-- continuous run option
+I wanted a simple tool to check the status of servers and services I use regularly without manually running repeated DNS and ping checks.
 
+This project helped me practice Python while applying basic networking concepts in a practical way.
 
+## Future improvements
+
+- Failure alerts through webhook or email
+- Continuous monitoring mode
+- Simple dashboard for historical results
